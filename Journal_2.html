@@ -787,6 +787,198 @@ footer{
         font-size:13px;
     }
 }
+
+/* ================= NEW CSS FOR CALENDAR & SCREENSHOTS ================= */
+.direction-badge {
+    font-size:10px;
+    font-weight:700;
+    padding:3px 8px;
+    border-radius:12px;
+    background:var(--accent-soft);
+    color:var(--accent);
+    white-space:nowrap;
+}
+.direction-badge.long { background:rgba(18,180,138,.15); color:var(--win); }
+.direction-badge.short { background:rgba(255,92,124,.15); color:var(--loss); }
+
+.screenshot-thumb {
+    width:40px; height:40px;
+    object-fit:cover;
+    border-radius:8px;
+    margin:2px;
+    cursor:pointer;
+    border:2px solid transparent;
+    transition:border .2s ease;
+}
+.screenshot-thumb:hover {
+    border-color:var(--accent);
+}
+.screenshot-preview-container {
+    display:flex;
+    flex-wrap:wrap;
+    gap:4px;
+    margin-top:8px;
+}
+.trade-screenshots {
+    display:flex;
+    flex-wrap:wrap;
+    gap:4px;
+    margin-top:8px;
+}
+
+.calendar-controls {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    margin-bottom:14px;
+}
+#cal-month-label {
+    font-family:var(--font-d);
+    font-size:16px;
+    font-weight:700;
+    min-width:140px;
+    text-align:center;
+}
+.calendar-grid {
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:4px;
+    margin-bottom:14px;
+}
+.calendar-grid .day-name {
+    font-weight:700;
+    font-size:11px;
+    color:var(--text-soft);
+    text-align:center;
+    padding:6px 0;
+}
+.calendar-grid .day-cell {
+    position:relative;
+    border-radius:8px;
+    padding:8px 4px;
+    text-align:center;
+    cursor:default;
+    min-height:48px;
+    background:var(--bg);
+    box-shadow:2px 2px 5px var(--sh-d), -2px -2px 5px var(--sh-l);
+    transition:all .15s ease;
+    font-size:12px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2px;
+}
+.calendar-grid .day-cell:hover {
+    transform:translateY(-1px);
+    box-shadow:3px 3px 7px var(--sh-d), -3px -3px 7px var(--sh-l);
+}
+.calendar-grid .day-cell.other-month {
+    opacity:0.45;
+}
+.calendar-grid .day-cell.today {
+    outline:2px solid var(--accent);
+}
+.calendar-grid .day-cell.profit {
+    background:rgba(18,180,138,.2);
+}
+.calendar-grid .day-cell.loss {
+    background:rgba(255,92,124,.2);
+}
+.calendar-grid .day-cell .day-number {
+    font-weight:600;
+}
+.calendar-grid .day-cell .day-pnl {
+    font-size:10px;
+    font-weight:700;
+}
+.calendar-summary {
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:14px;
+    flex-wrap:wrap;
+}
+.calendar-summary .summary-item {
+    flex:1;
+    min-width:120px;
+    padding:10px;
+    text-align:center;
+}
+.calendar-summary .summary-item .label {
+    font-size:11px;
+    color:var(--text-soft);
+    text-transform:uppercase;
+    letter-spacing:.4px;
+}
+.calendar-summary .summary-item .value {
+    font-family:var(--font-d);
+    font-weight:700;
+    font-size:18px;
+}
+.calendar-summary .summary-item .value.win { color:var(--win); }
+.calendar-summary .summary-item .value.lose { color:var(--loss); }
+
+#weekly-breakdown {
+    margin-top:12px;
+}
+.week-row {
+    display:flex;
+    justify-content:space-between;
+    padding:8px 10px;
+    border-radius:8px;
+    margin-bottom:4px;
+    background:var(--bg);
+    box-shadow:2px 2px 5px var(--sh-d), -2px -2px 5px var(--sh-l);
+    font-size:12px;
+}
+.week-row .week-range {
+    color:var(--text-soft);
+}
+.week-row .week-pnl.win { color:var(--win); font-weight:700; }
+.week-row .week-pnl.lose { color:var(--loss); font-weight:700; }
+
+.modal-overlay {
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    z-index:300;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:16px;
+}
+.modal-content {
+    background:var(--bg);
+    border-radius:var(--radius);
+    padding:20px;
+    width:100%;
+    max-width:500px;
+    max-height:80vh;
+    overflow-y:auto;
+}
+.modal-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+}
+.modal-header h3 {
+    margin:0;
+    font-size:18px;
+}
+#dayTradesList .trade-item {
+    box-shadow:none;
+    background:transparent;
+    border-radius:0;
+    padding:10px 0;
+    border-bottom:1px solid var(--sh-d);
+    margin-bottom:8px;
+}
+#dayTradesList .trade-item:last-child {
+    border-bottom:none;
+}
 </style>
 </head>
 <body data-theme="light">
@@ -798,68 +990,77 @@ footer{
         Greatness Begins Here
         <span>ANGELSSON</span>
     </div>
-    <button id="enterBtn" class="neu-btn accent">Enter Journal 🚀</button>
+    <button id="enterBtn" class="neu-btn accent">Enter Journal ??</button>
 </div>
 
 <!-- ================= APP ================= -->
 <div id="app">
     <div id="overlay"></div>
     <div id="mobileMenu" class="neu">
-        <h3 style="font-family:var(--font-d); margin-top:0;">Menu 📋</h3>
-        <button class="neu-btn mnav" data-target="log">📒 Trade Log</button>
-        <button class="neu-btn mnav" data-target="metrics">📊 Metrics</button>
-        <button class="neu-btn mnav" data-target="advice">🧠 Advice</button>
+        <h3 style="font-family:var(--font-d); margin-top:0;">Menu ?</h3>
+        <button class="neu-btn mnav" data-target="log">?? Trade Log</button>
+        <button class="neu-btn mnav" data-target="metrics">?? Metrics</button>
+        <button class="neu-btn mnav" data-target="advice">?? Advice</button>
+        <button class="neu-btn mnav" data-target="calendar">?? Calendar</button>
     </div>
 
     <header class="topbar neu">
         <div class="brand"><span class="dot"></span> AngelsSon Journal</div>
         <div class="top-actions">
-            <button class="icon-btn neu-btn" id="themeBtn" title="Toggle theme">🌙</button>
-            <button class="icon-btn neu-btn" id="hamburgerBtn" title="Menu">☰</button>
+            <button class="icon-btn neu-btn" id="themeBtn" title="Toggle theme">??</button>
+            <button class="icon-btn neu-btn" id="hamburgerBtn" title="Menu">?</button>
         </div>
     </header>
 
     <nav class="navbar neu">
-        <button class="neu-btn nav-link active" data-target="log">📒 Trade Log</button>
-        <button class="neu-btn nav-link" data-target="metrics">📊 Metrics</button>
-        <button class="neu-btn nav-link" data-target="advice">🧠 Advice</button>
+        <button class="neu-btn nav-link active" data-target="log">?? Trade Log</button>
+        <button class="neu-btn nav-link" data-target="metrics">?? Metrics</button>
+        <button class="neu-btn nav-link" data-target="advice">?? Advice</button>
+        <button class="neu-btn nav-link" data-target="calendar">?? Calendar</button>
     </nav>
 
     <main>
         <!-- ============ TRADE LOG SECTION ============ -->
         <section id="log" class="section active">
             <div class="card neu">
-                <h2>➕ Log a Trade</h2>
+                <h2>?? Log a Trade</h2>
                 <div class="form-grid">
                     <div class="field">
-                        <label>Asset 💱</label>
+                        <label>Asset ??</label>
                         <select id="f-asset"></select>
                     </div>
                     <div class="field">
-                        <label>Lot Size 📦</label>
+                        <label>Lot Size ??</label>
                         <input type="number" step="0.01" id="f-lot" placeholder="e.g. 0.10">
                     </div>
                     <div class="field">
-                        <label>Risk Amount ($) ⚠️</label>
+                        <label>Risk Amount ($) ??</label>
                         <input type="number" step="0.01" id="f-risk" placeholder="e.g. 20">
                     </div>
                     <div class="field">
-                        <label>Pips Moved 📏</label>
+                        <label>Pips Moved ??</label>
                         <input type="number" step="0.1" id="f-pips" placeholder="e.g. 35">
+                    </div>
+                    <div class="field full">
+                        <label>Direction</label>
+                        <div class="toggle-pair">
+                            <button type="button" class="neu-btn active" id="f-long-btn">?? Long</button>
+                            <button type="button" class="neu-btn" id="f-short-btn">?? Short</button>
+                        </div>
                     </div>
                     <div class="field full">
                         <label>Result</label>
                         <div class="toggle-pair">
-                            <button type="button" class="neu-btn active" id="f-win-btn">✅ Win</button>
-                            <button type="button" class="neu-btn" id="f-lose-btn">❌ Lose</button>
+                            <button type="button" class="neu-btn active" id="f-win-btn">? Win</button>
+                            <button type="button" class="neu-btn" id="f-lose-btn">? Lose</button>
                         </div>
                     </div>
                     <div class="field">
-                        <label id="f-money-label">Amount Won ($) 💰</label>
+                        <label id="f-money-label">Amount Won ($) ??</label>
                         <input type="number" step="0.01" id="f-money" placeholder="e.g. 45">
                     </div>
                     <div class="field">
-                        <label>Duration ⏱️</label>
+                        <label>Duration ??</label>
                         <div class="duration-row">
                             <input type="number" step="1" id="f-duration" placeholder="e.g. 15">
                             <select id="f-duration-unit">
@@ -869,7 +1070,7 @@ footer{
                         </div>
                     </div>
                     <div class="field full">
-                        <label>Reason for Trade 🎯</label>
+                        <label>Reason for Trade ??</label>
                         <select id="f-reason">
                             <option>Trendline Break</option>
                             <option>Trendline Hit</option>
@@ -884,12 +1085,17 @@ footer{
                             <option>Order Block</option>
                         </select>
                     </div>
+                    <div class="field full">
+                        <label>Screenshots ?? (optional)</label>
+                        <input type="file" id="f-screenshots" accept="image/*" multiple>
+                        <div id="screenshot-preview" class="screenshot-preview-container"></div>
+                    </div>
                 </div>
-                <button class="neu-btn primary" id="submitTradeBtn">🚀 Log Trade</button>
+                <button class="neu-btn primary" id="submitTradeBtn">?? Log Trade</button>
             </div>
 
             <div class="card neu">
-                <h2>📜 Trade History</h2>
+                <h2>?? Trade History</h2>
                 <div id="logList"></div>
             </div>
         </section>
@@ -897,7 +1103,7 @@ footer{
         <!-- ============ METRICS SECTION ============ -->
         <section id="metrics" class="section">
             <div class="card neu">
-                <h2>🔎 Filters</h2>
+                <h2>?? Filters</h2>
                 <div class="filter-row">
                     <select id="m-time">
                         <option value="all">All Time</option>
@@ -926,7 +1132,7 @@ footer{
             </div>
 
             <div class="card neu consistency-wrap">
-                <h2 style="justify-content:center;">🧭 Consistency Score</h2>
+                <h2 style="justify-content:center;">?? Consistency Score</h2>
                 <div class="gauge">
                     <svg width="140" height="140" viewBox="0 0 140 140">
                         <circle cx="70" cy="70" r="60" fill="none" stroke-width="12" style="stroke:var(--sh-d); opacity:.5;"></circle>
@@ -941,19 +1147,53 @@ footer{
                 <div class="consistency-note" id="c-note">Measures how consistent your risk sizing and lot sizes are across trades.</div>
             </div>
 
-            <button class="neu-btn primary export-btn" id="exportPdfBtn">📄 Download PDF Report</button>
+            <button class="neu-btn primary export-btn" id="exportPdfBtn">?? Download PDF Report</button>
         </section>
 
         <!-- ============ ADVICE SECTION ============ -->
         <section id="advice" class="section">
             <div class="card neu">
-                <h2>🧠 System Advice</h2>
+                <h2>?? System Advice</h2>
                 <div id="adviceList"></div>
+            </div>
+        </section>
+
+        <!-- ============ CALENDAR SECTION (NEW) ============ -->
+        <section id="calendar" class="section">
+            <div class="card neu">
+                <h2>?? Trade Calendar</h2>
+                <div class="calendar-controls">
+                    <button class="neu-btn" id="cal-prev">‹</button>
+                    <span id="cal-month-label" class="numeric"></span>
+                    <button class="neu-btn" id="cal-next">›</button>
+                </div>
+                <div id="calendar-grid" class="calendar-grid"></div>
+                <div class="calendar-summary">
+                    <div class="summary-item neu">
+                        <div class="label">Week P&L</div>
+                        <div id="cal-week-pnl" class="value">$0</div>
+                    </div>
+                    <div class="summary-item neu">
+                        <div class="label">Month P&L</div>
+                        <div id="cal-month-pnl" class="value">$0</div>
+                    </div>
+                </div>
+                <div id="weekly-breakdown"></div>
+            </div>
+            <!-- Day Modal -->
+            <div id="dayModal" class="modal-overlay" style="display:none;">
+                <div class="modal-content neu">
+                    <div class="modal-header">
+                        <h3 id="dayModalTitle"></h3>
+                        <button class="neu-btn" id="closeDayModal">??</button>
+                    </div>
+                    <div id="dayTradesList"></div>
+                </div>
             </div>
         </section>
     </main>
 
-    <footer>Built for AngelsSon 👑 · Your data stays on this device</footer>
+    <footer>Built for AngelsSon ?? · Your data stays on this device</footer>
 </div>
 
 <script>
@@ -969,12 +1209,17 @@ let trades = [];
 let assets = [];
 let theme = 'light';
 let consistencyMode = 'trades';
+let currentDirection = 'long';          // NEW
+let pendingScreenshots = [];            // NEW array of data URLs
+let currentCalendarDate = new Date();   // NEW: first day of displayed month
+let selectedDate = null;                // NEW: selected day for week P&L
 
 try {
     trades = JSON.parse(localStorage.getItem('as_trades') || '[]');
     assets = JSON.parse(localStorage.getItem('as_assets') || JSON.stringify(DEFAULT_ASSETS));
     theme = localStorage.getItem('as_theme') || 'light';
     consistencyMode = localStorage.getItem('as_cmode') || 'trades';
+    // NEW: load direction preference? not needed
 } catch (e) {
     trades = [];
     assets = [...DEFAULT_ASSETS];
@@ -1084,7 +1329,7 @@ function saveAssets() {
 function applyTheme() {
     document.body.setAttribute('data-theme', theme);
     var themeBtn = document.getElementById('themeBtn');
-    if (themeBtn) themeBtn.textContent = theme === 'light' ? '🌙' : '☀️';
+    if (themeBtn) themeBtn.textContent = theme === 'light' ? '??' : '??';
     try {
         localStorage.setItem('as_theme', theme);
     } catch (e) {}
@@ -1112,6 +1357,7 @@ function showSection(id) {
     });
     if (id === 'metrics') renderMetrics();
     if (id === 'advice') renderAdvice();
+    if (id === 'calendar') renderCalendar();   // NEW
     closeMobileMenu();
 }
 document.querySelectorAll('.nav-link, .mnav').forEach(function(btn) {
@@ -1184,13 +1430,17 @@ var currentResult = 'win';
 var fWinBtn = document.getElementById('f-win-btn');
 var fLoseBtn = document.getElementById('f-lose-btn');
 var fMoneyLabel = document.getElementById('f-money-label');
+var fLongBtn = document.getElementById('f-long-btn');
+var fShortBtn = document.getElementById('f-short-btn');
+var fScreenshotsInput = document.getElementById('f-screenshots');
+var screenshotPreview = document.getElementById('screenshot-preview');
 
 if (fWinBtn) {
     fWinBtn.addEventListener('click', function() {
         currentResult = 'win';
         fWinBtn.classList.add('active');
         if (fLoseBtn) fLoseBtn.classList.remove('active');
-        if (fMoneyLabel) fMoneyLabel.textContent = 'Amount Won ($) 💰';
+        if (fMoneyLabel) fMoneyLabel.textContent = 'Amount Won ($) ??';
     });
 }
 if (fLoseBtn) {
@@ -1198,7 +1448,60 @@ if (fLoseBtn) {
         currentResult = 'lose';
         fLoseBtn.classList.add('active');
         if (fWinBtn) fWinBtn.classList.remove('active');
-        if (fMoneyLabel) fMoneyLabel.textContent = 'Amount Lost ($) 💸';
+        if (fMoneyLabel) fMoneyLabel.textContent = 'Amount Lost ($) ??';
+    });
+}
+
+// NEW: direction toggles
+if (fLongBtn) {
+    fLongBtn.addEventListener('click', function() {
+        currentDirection = 'long';
+        fLongBtn.classList.add('active');
+        if (fShortBtn) fShortBtn.classList.remove('active');
+    });
+}
+if (fShortBtn) {
+    fShortBtn.addEventListener('click', function() {
+        currentDirection = 'short';
+        fShortBtn.classList.add('active');
+        if (fLongBtn) fLongBtn.classList.remove('active');
+    });
+}
+
+// NEW: screenshot file input handler
+if (fScreenshotsInput) {
+    fScreenshotsInput.addEventListener('change', function() {
+        pendingScreenshots = [];
+        screenshotPreview.innerHTML = '';
+        var files = this.files;
+        if (!files.length) return;
+        // Process each file, compress and store as data URL
+        Array.from(files).forEach(function(file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var img = new Image();
+                img.onload = function() {
+                    var canvas = document.createElement('canvas');
+                    var maxDim = 800;
+                    var ratio = Math.min(maxDim / img.width, maxDim / img.height, 1);
+                    canvas.width = Math.round(img.width * ratio);
+                    canvas.height = Math.round(img.height * ratio);
+                    var ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    var dataURL = canvas.toDataURL('image/jpeg', 0.7);
+                    pendingScreenshots.push(dataURL);
+                    // Show preview thumbnail
+                    var thumb = document.createElement('img');
+                    thumb.src = dataURL;
+                    thumb.className = 'screenshot-thumb';
+                    screenshotPreview.appendChild(thumb);
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+        // Clear input so same file can be re-selected
+        this.value = '';
     });
 }
 
@@ -1228,13 +1531,14 @@ if (submitBtn) {
 
         if (asset === '__add__' || isNaN(lot) || isNaN(risk) || isNaN(pips) || isNaN(moneyRaw) || isNaN(
             durationVal)) {
-            alert('⚠️ Please fill in all fields with valid numbers before logging the trade.');
+            alert('?? Please fill in all fields with valid numbers before logging the trade.');
             return;
         }
 
         var durationMin = durationUnit === 'hr' ? durationVal * 60 : durationVal;
         var pnl = currentResult === 'win' ? Math.abs(moneyRaw) : -Math.abs(moneyRaw);
 
+        // NEW: add direction and screenshots
         trades.unshift({
             id: Date.now(),
             date: new Date().toISOString(),
@@ -1245,18 +1549,24 @@ if (submitBtn) {
             result: currentResult,
             pnl: pnl,
             durationMin: durationMin,
-            reason: reason
+            reason: reason,
+            direction: currentDirection,
+            screenshots: pendingScreenshots.slice()   // copy array
         });
         saveTrades();
         renderLog();
-
+        // Clear form
         ['f-lot', 'f-risk', 'f-pips', 'f-money', 'f-duration'].forEach(function(id) {
             var el = document.getElementById(id);
             if (el) el.value = '';
         });
-        submitBtn.textContent = '✅ Logged!';
+        // Clear screenshots
+        pendingScreenshots = [];
+        if (screenshotPreview) screenshotPreview.innerHTML = '';
+        if (fScreenshotsInput) fScreenshotsInput.value = '';
+        submitBtn.textContent = '? Logged!';
         setTimeout(function() {
-            submitBtn.textContent = '🚀 Log Trade';
+            submitBtn.textContent = '?? Log Trade';
         }, 900);
     });
 }
@@ -1280,31 +1590,40 @@ function renderLog() {
     if (!list) return;
     if (trades.length === 0) {
         list.innerHTML =
-        '<div class="empty-state">📭 No trades logged yet. Add your first trade above!</div>';
+        '<div class="empty-state">?? No trades logged yet. Add your first trade above!</div>';
         return;
     }
     list.innerHTML = trades.map(function(t) {
+        var directionBadge = '<span class="direction-badge ' + (t.direction || 'long') + '">' +
+            (t.direction === 'short' ? '?? Short' : '?? Long') + '</span>';
+        var screenshotsHtml = '';
+        if (t.screenshots && t.screenshots.length) {
+            screenshotsHtml = '<div class="trade-screenshots">' + t.screenshots.map(function(src) {
+                return '<img src="' + src + '" class="screenshot-thumb" data-full="' + src + '">';
+            }).join('') + '</div>';
+        }
         return '<div class="trade-item neu">' +
             '<div class="trade-top">' +
-            '<div class="trade-asset">💱 ' + t.asset + '</div>' +
-            '<span class="badge ' + t.result + '">' + (t.result === 'win' ? '✅ WIN' : '❌ LOSE') +
+            '<div class="trade-asset">?? ' + t.asset + ' ' + directionBadge + '</div>' +
+            '<span class="badge ' + t.result + '">' + (t.result === 'win' ? '? WIN' : '? LOSE') +
             '</span>' +
             '</div>' +
             '<div class="trade-mid">' +
             '<div class="trade-pnl ' + t.result + '">' + (t.pnl >= 0 ? '+' : '') + '$' + t.pnl.toFixed(
                 2) + '</div>' +
-            '<button class="del-btn" onclick="deleteTrade(' + t.id + ')">🗑️</button>' +
+            '<button class="del-btn" onclick="deleteTrade(' + t.id + ')">???</button>' +
             '</div>' +
             '<div class="trade-meta">' +
-            '<span>📦 ' + t.lot + ' lots</span>' +
-            '<span>⚠️ $' + t.risk.toFixed(2) + ' risk</span>' +
-            '<span>📏 ' + t.pips + ' pips</span>' +
-            '<span>⏱️ ' + fmtDuration(t.durationMin) + '</span>' +
-            '<span>🗓️ ' + fmtDate(t.date) + '</span>' +
+            '<span>?? ' + t.lot + ' lots</span>' +
+            '<span>?? $' + t.risk.toFixed(2) + ' risk</span>' +
+            '<span>?? ' + t.pips + ' pips</span>' +
+            '<span>?? ' + fmtDuration(t.durationMin) + '</span>' +
+            '<span>?? ' + fmtDate(t.date) + '</span>' +
             '</div>' +
             '<div class="trade-bottom">' +
-            '<span class="reason-chip">🎯 ' + t.reason + '</span>' +
+            '<span class="reason-chip">?? ' + t.reason + '</span>' +
             '</div>' +
+            screenshotsHtml +
             '</div>';
     }).join('');
 }
@@ -1316,6 +1635,10 @@ function deleteTrade(id) {
     });
     saveTrades();
     renderLog();
+    // If calendar section is active, also re-render calendar
+    if (document.getElementById('calendar').classList.contains('active')) {
+        renderCalendar();
+    }
 }
 
 /* ============================================================
@@ -1503,7 +1826,7 @@ function renderAdvice() {
     if (!box) return;
     if (list.length < 3) {
         box.innerHTML =
-            '<div class="advice-item neu"><div class="advice-icon">🌱</div><div class="advice-text">Log at least <b>3 trades</b> so the system can start spotting patterns and give you tailored advice.</div></div>';
+            '<div class="advice-item neu"><div class="advice-icon">??</div><div class="advice-text">Log at least <b>3 trades</b> so the system can start spotting patterns and give you tailored advice.</div></div>';
         return;
     }
     var s = computeStats(list);
@@ -1513,13 +1836,13 @@ function renderAdvice() {
 
     if (s.winRate < 40) {
         tips.push({
-            icon: '📉',
+            icon: '??',
             text: 'Your win rate is <b>' + s.winRate.toFixed(0) +
                 '%</b>, on the low side. Before increasing size, review your losing trades for a common mistake.'
         });
     } else if (s.winRate > 65) {
         tips.push({
-            icon: '🔥',
+            icon: '??',
             text: 'Strong win rate of <b>' + s.winRate.toFixed(0) +
                 '%</b>. If risk stays consistent, this is a good sign you can scale size gradually.'
         });
@@ -1527,7 +1850,7 @@ function renderAdvice() {
 
     if (s.avgRR < 1 && s.avgLoss > 0) {
         tips.push({
-            icon: '⚖️',
+            icon: '??',
             text: 'Average loss ($' + s.avgLoss.toFixed(2) + ') is bigger than average win ($' + s.avgWin.toFixed(
                 2) + '). Try tightening stops or letting winners run to fix your risk:reward.'
         });
@@ -1535,7 +1858,7 @@ function renderAdvice() {
 
     if (cTrades.score < 50) {
         tips.push({
-            icon: '🎯',
+            icon: '??',
             text: 'Your risk-sizing consistency score is <b>' + cTrades.score +
                 '/100</b>. Try risking the same % of your account on every trade instead of varying lot size.'
         });
@@ -1543,7 +1866,7 @@ function renderAdvice() {
 
     if (cDollars.score < 50) {
         tips.push({
-            icon: '📊',
+            icon: '??',
             text: 'Your dollar-result consistency is <b>' + cDollars.score +
                 '/100</b> — results are swinging a lot trade to trade. Reducing size on lower-confidence setups can smooth this out.'
         });
@@ -1551,14 +1874,14 @@ function renderAdvice() {
 
     if (s.worst && s.worstRate < 35 && (s.byReason[s.worst].w + s.byReason[s.worst].l) >= 3) {
         tips.push({
-            icon: '🚫',
+            icon: '??',
             text: '<b>' + s.worst + '</b> setups are only winning ' + s.worstRate.toFixed(0) +
                 '% of the time. Consider pausing this setup or waiting for stronger confirmation.'
         });
     }
     if (s.best && s.bestRate > 60 && (s.byReason[s.best].w + s.byReason[s.best].l) >= 3) {
         tips.push({
-            icon: '⭐',
+            icon: '??',
             text: '<b>' + s.best + '</b> is your strongest setup at ' + s.bestRate.toFixed(0) +
                 '% win rate. Lean into it when it lines up.'
         });
@@ -1568,7 +1891,7 @@ function renderAdvice() {
     var riskStd = stdev(list.map(function(t) { return t.risk; }));
     if (avgRiskPct > 0 && (riskStd / avgRiskPct) > 0.5) {
         tips.push({
-            icon: '🧩',
+            icon: '??',
             text: 'Your risk amount per trade varies a lot (avg $' + avgRiskPct.toFixed(2) +
                 '). Reducing lot size on impulsive trades can protect your consistency score.'
         });
@@ -1579,7 +1902,7 @@ function renderAdvice() {
     var perDay = totalTrades / spanDays;
     if (perDay > 6) {
         tips.push({
-            icon: '⏳',
+            icon: '?',
             text: "You're averaging ~" + perDay.toFixed(1) +
                 " trades/day. Make sure every entry still meets your full checklist — overtrading quietly erodes consistency."
         });
@@ -1587,7 +1910,7 @@ function renderAdvice() {
 
     if (tips.length === 0) {
         tips.push({
-            icon: '👍',
+            icon: '?',
             text: 'Metrics look balanced right now. Keep logging trades consistently to sharpen these insights further.'
         });
     }
@@ -1649,13 +1972,14 @@ if (exportPdfBtn) {
         doc.setFontSize(8.5);
         doc.text('Date', 14, y);
         doc.text('Asset', 40, y);
-        doc.text('Result', 62, y);
-        doc.text('P&L', 80, y);
-        doc.text('Lot', 100, y);
-        doc.text('Risk', 116, y);
-        doc.text('Pips', 134, y);
-        doc.text('Dur', 150, y);
-        doc.text('Reason', 166, y);
+        doc.text('Dir', 62, y);      // added direction column
+        doc.text('Result', 72, y);
+        doc.text('P&L', 90, y);
+        doc.text('Lot', 110, y);
+        doc.text('Risk', 126, y);
+        doc.text('Pips', 144, y);
+        doc.text('Dur', 160, y);
+        doc.text('Reason', 176, y);
         y += 5;
         doc.setDrawColor(200);
         doc.line(14, y - 3, 196, y - 3);
@@ -1666,13 +1990,14 @@ if (exportPdfBtn) {
                 y = 18; }
             doc.text(new Date(t.date).toLocaleDateString(), 14, y);
             doc.text(t.asset, 40, y);
-            doc.text(t.result, 62, y);
-            doc.text('$' + t.pnl.toFixed(2), 80, y);
-            doc.text(String(t.lot), 100, y);
-            doc.text('$' + t.risk.toFixed(2), 116, y);
-            doc.text(String(t.pips), 134, y);
-            doc.text(fmtDuration(t.durationMin), 150, y);
-            doc.text(t.reason.substring(0, 16), 166, y);
+            doc.text(t.direction === 'short' ? 'S' : 'L', 62, y);
+            doc.text(t.result, 72, y);
+            doc.text('$' + t.pnl.toFixed(2), 90, y);
+            doc.text(String(t.lot), 110, y);
+            doc.text('$' + t.risk.toFixed(2), 126, y);
+            doc.text(String(t.pips), 144, y);
+            doc.text(fmtDuration(t.durationMin), 160, y);
+            doc.text(t.reason.substring(0, 16), 176, y);
             y += 6;
         });
 
@@ -1683,10 +2008,234 @@ if (exportPdfBtn) {
 }
 
 /* ============================================================
+   CALENDAR FUNCTIONS (NEW)
+============================================================ */
+function getDateKey(date) {
+    var y = date.getFullYear();
+    var m = ('0' + (date.getMonth() + 1)).slice(-2);
+    var d = ('0' + date.getDate()).slice(-2);
+    return y + '-' + m + '-' + d;
+}
+
+function getTradesForDate(date) {
+    var key = getDateKey(date);
+    return trades.filter(function(t) {
+        return getDateKey(new Date(t.date)) === key;
+    });
+}
+
+function getNetPnlForDate(date) {
+    return getTradesForDate(date).reduce(function(sum, t) { return sum + t.pnl; }, 0);
+}
+
+function getWeekRange(date) {
+    var d = new Date(date);
+    var day = d.getDay(); // 0=Sun, 1=Mon, ...
+    var diffToMonday = (day === 0 ? 6 : day - 1);
+    var monday = new Date(d);
+    monday.setDate(d.getDate() - diffToMonday);
+    monday.setHours(0,0,0,0);
+    var sunday = new Date(monday);
+    sunday.setDate(monday.getDate() + 6);
+    sunday.setHours(23,59,59,999);
+    return { start: monday, end: sunday };
+}
+
+function getNetPnlForWeek(date) {
+    var week = getWeekRange(date);
+    return trades.filter(function(t) {
+        var d = new Date(t.date);
+        return d >= week.start && d <= week.end;
+    }).reduce(function(sum, t) { return sum + t.pnl; }, 0);
+}
+
+function getNetPnlForMonth(year, month) {
+    return trades.filter(function(t) {
+        var d = new Date(t.date);
+        return d.getFullYear() === year && d.getMonth() === month;
+    }).reduce(function(sum, t) { return sum + t.pnl; }, 0);
+}
+
+function renderCalendar() {
+    var grid = document.getElementById('calendar-grid');
+    var label = document.getElementById('cal-month-label');
+    var weekPnlEl = document.getElementById('cal-week-pnl');
+    var monthPnlEl = document.getElementById('cal-month-pnl');
+    var weeklyBreakdown = document.getElementById('weekly-breakdown');
+    if (!grid || !label || !weekPnlEl || !monthPnlEl) return;
+
+    var year = currentCalendarDate.getFullYear();
+    var month = currentCalendarDate.getMonth();
+    label.textContent = currentCalendarDate.toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+
+    // Build calendar grid
+    var firstDay = new Date(year, month, 1);
+    var lastDay = new Date(year, month + 1, 0);
+    var startOffset = (firstDay.getDay() + 6) % 7; // Monday = 0
+    var daysInMonth = lastDay.getDate();
+    var totalCells = startOffset + daysInMonth;
+    // Ensure complete weeks (multiple of 7)
+    var rows = Math.ceil(totalCells / 7);
+    var totalSlots = rows * 7;
+
+    var html = '<div class="day-name">Mon</div><div class="day-name">Tue</div><div class="day-name">Wed</div><div class="day-name">Thu</div><div class="day-name">Fri</div><div class="day-name">Sat</div><div class="day-name">Sun</div>';
+
+    var today = new Date();
+    var todayKey = getDateKey(today);
+
+    for (var i = 0; i < totalSlots; i++) {
+        var cellDate = new Date(year, month, 1 - startOffset + i);
+        var inCurrentMonth = cellDate.getMonth() === month;
+        var dateKey = getDateKey(cellDate);
+        var net = getNetPnlForDate(cellDate);
+        var hasTrades = getTradesForDate(cellDate).length > 0;
+
+        var classes = 'day-cell';
+        if (!inCurrentMonth) classes += ' other-month';
+        if (dateKey === todayKey) classes += ' today';
+        if (hasTrades) {
+            classes += net >= 0 ? ' profit' : ' loss';
+        }
+        var pnlDisplay = hasTrades ? (net >= 0 ? '+' : '') + '$' + net.toFixed(0) : '';
+
+        html += '<div class="' + classes + '" data-date="' + dateKey + '">' +
+                '<span class="day-number">' + cellDate.getDate() + '</span>' +
+                (pnlDisplay ? '<span class="day-pnl">' + pnlDisplay + '</span>' : '') +
+                '</div>';
+    }
+    grid.innerHTML = html;
+
+    // Add click listeners to day cells
+    grid.querySelectorAll('.day-cell').forEach(function(cell) {
+        cell.addEventListener('click', function() {
+            var dateKey = this.dataset.date;
+            var clickedDate = new Date(dateKey + 'T00:00:00');
+            selectedDate = clickedDate;
+            openDayModal(clickedDate);
+            renderCalendar(); // update week P&L highlight
+        });
+    });
+
+    // Update week P&L based on selectedDate or current date
+    var weekBase = selectedDate || new Date();
+    var weekPnl = getNetPnlForWeek(weekBase);
+    weekPnlEl.textContent = (weekPnl >= 0 ? '+' : '') + '$' + weekPnl.toFixed(2);
+    weekPnlEl.className = 'value ' + (weekPnl >= 0 ? 'win' : 'lose');
+
+    var monthPnl = getNetPnlForMonth(year, month);
+    monthPnlEl.textContent = (monthPnl >= 0 ? '+' : '') + '$' + monthPnl.toFixed(2);
+    monthPnlEl.className = 'value ' + (monthPnl >= 0 ? 'win' : 'lose');
+
+    // Build weekly breakdown for the displayed month
+    var weeksHtml = '';
+    var weekStart = new Date(year, month, 1);
+    // Adjust to Monday
+    var diff = (weekStart.getDay() + 6) % 7;
+    weekStart.setDate(weekStart.getDate() - diff);
+    while (weekStart <= lastDay) {
+        var weekEnd = new Date(weekStart);
+        weekEnd.setDate(weekStart.getDate() + 6);
+        var weekPnlAmount = trades.filter(function(t) {
+            var d = new Date(t.date);
+            return d >= weekStart && d <= weekEnd;
+        }).reduce(function(sum, t) { return sum + t.pnl; }, 0);
+        var rangeStr = weekStart.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) + ' - ' +
+                      weekEnd.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+        weeksHtml += '<div class="week-row">' +
+                     '<span class="week-range">' + rangeStr + '</span>' +
+                     '<span class="week-pnl ' + (weekPnlAmount >= 0 ? 'win' : 'lose') + '">' +
+                     (weekPnlAmount >= 0 ? '+' : '') + '$' + weekPnlAmount.toFixed(2) + '</span>' +
+                     '</div>';
+        weekStart = new Date(weekEnd);
+        weekStart.setDate(weekStart.getDate() + 1);
+    }
+    if (weeklyBreakdown) weeklyBreakdown.innerHTML = weeksHtml;
+}
+
+function openDayModal(date) {
+    var modal = document.getElementById('dayModal');
+    var title = document.getElementById('dayModalTitle');
+    var listContainer = document.getElementById('dayTradesList');
+    if (!modal || !title || !listContainer) return;
+
+    var tradesForDay = getTradesForDate(date);
+    title.textContent = date.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' }) +
+                       ' — ' + tradesForDay.length + ' trade(s)';
+    var html = '';
+    if (tradesForDay.length === 0) {
+        html = '<div class="empty-state">No trades on this day.</div>';
+    } else {
+        tradesForDay.forEach(function(t) {
+            var directionBadge = '<span class="direction-badge ' + (t.direction || 'long') + '">' +
+                (t.direction === 'short' ? '?? Short' : '?? Long') + '</span>';
+            var screenshotsHtml = '';
+            if (t.screenshots && t.screenshots.length) {
+                screenshotsHtml = '<div class="trade-screenshots">' + t.screenshots.map(function(src) {
+                    return '<img src="' + src + '" class="screenshot-thumb" data-full="' + src + '">';
+                }).join('') + '</div>';
+            }
+            html += '<div class="trade-item">' +
+                    '<div class="trade-top"><span class="trade-asset">' + t.asset + ' ' + directionBadge + '</span>' +
+                    '<span class="badge ' + t.result + '">' + (t.result === 'win' ? '? WIN' : '? LOSE') + '</span></div>' +
+                    '<div class="trade-mid"><span class="trade-pnl ' + t.result + '">' +
+                    (t.pnl >= 0 ? '+' : '') + '$' + t.pnl.toFixed(2) + '</span></div>' +
+                    '<div class="trade-meta">' +
+                    '<span>?? ' + t.lot + ' lots</span>' +
+                    '<span>?? $' + t.risk.toFixed(2) + ' risk</span>' +
+                    '<span>?? ' + t.pips + ' pips</span>' +
+                    '<span>?? ' + fmtDuration(t.durationMin) + '</span>' +
+                    '<span>?? ' + fmtDate(t.date) + '</span>' +
+                    '</div>' +
+                    '<div class="trade-bottom"><span class="reason-chip">?? ' + t.reason + '</span></div>' +
+                    screenshotsHtml +
+                    '</div>';
+        });
+    }
+    listContainer.innerHTML = html;
+    modal.style.display = 'flex';
+
+    // Add click event to thumbnails to open full image (simple approach)
+    listContainer.querySelectorAll('.screenshot-thumb').forEach(function(img) {
+        img.addEventListener('click', function() {
+            window.open(this.dataset.full, '_blank');
+        });
+    });
+}
+
+function closeDayModal() {
+    var modal = document.getElementById('dayModal');
+    if (modal) modal.style.display = 'none';
+}
+
+// Calendar navigation and modal close events
+document.getElementById('cal-prev').addEventListener('click', function() {
+    currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1);
+    renderCalendar();
+});
+document.getElementById('cal-next').addEventListener('click', function() {
+    currentCalendarDate.setMonth(currentCalendarDate.getMonth() + 1);
+    renderCalendar();
+});
+document.getElementById('closeDayModal').addEventListener('click', closeDayModal);
+document.getElementById('dayModal').addEventListener('click', function(e) {
+    if (e.target === this) closeDayModal();
+});
+
+// Also add global click handler for trade log screenshots (if any)
+document.addEventListener('click', function(e) {
+    if (e.target.classList && e.target.classList.contains('screenshot-thumb')) {
+        var src = e.target.dataset.full || e.target.src;
+        window.open(src, '_blank');
+    }
+});
+
+/* ============================================================
    INIT
 ============================================================ */
 renderLog();
 renderMetrics();
+// Initialize calendar for current month
+renderCalendar();
 </script>
 </body>
 </html>
